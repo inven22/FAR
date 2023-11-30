@@ -83,5 +83,6 @@ Route::get('/edit_lapangan/{id}', [App\Http\Controllers\lapangan::class,'Edit'])
 Route::post('/update_lapangan/{id}', [App\Http\Controllers\lapangan::class,'Update']);
 Route::get('/delete/{id}', [App\Http\Controllers\lapangan::class,'Delete']);
 Route::get('/export', [App\Http\Controllers\DataExport::class,'export'])->name('cus.export');
+Route::get('/export_lapang', [App\Http\Controllers\DataExport::class,'exportlapang'])->name('la.export');
 
 Route::get('pesan', [App\Http\Controllers\pesanController::class,'pesan'])->name('pesan.index');

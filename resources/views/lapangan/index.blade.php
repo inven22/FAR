@@ -5,8 +5,7 @@
         <div class="col-md-12">
             <div class="card card-primary">
                 <div class="card-header py-2">
-                    {{-- <a href="{{ route('') }}" class="btn btn-primary">Export Data</a>
-                    <a href="{{ URL::to('') }}" class="btn btn-primary">Import Data</a> --}}
+                    <a href="{{ route('la.export') }}" class="btn btn-success">Export</a>
                 </div>
                 <br>
 

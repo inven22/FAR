@@ -10,8 +10,7 @@ use Maatwebsite\Excel\Concerns\RegistersEventListeners;
 use Maatwebsite\Excel\Concerns\AfterSheet;
 use PhpOffice\PhpSpreadsheet\Style\Border;
 
-
-class PenyewaExport implements FromCollection, WithHeadings,WithColumnFormatting
+class LapanganExport implements FromCollection, WithHeadings,WithColumnFormatting
 {
     /**
     * @return \Illuminate\Support\Collection
@@ -21,16 +20,15 @@ class PenyewaExport implements FromCollection, WithHeadings,WithColumnFormatting
     public function collection()
     {
         // Ambil data dari database
-        $data = DB::table('penyewa')->get();
+        $data = DB::table('lapangans')->get();
 
         // Ubah data menjadi koleksi (collection) untuk diolah oleh Maatwebsite Excel
         $collection = collect($data)->map(function ($item) {
             return [
                 'id' => $item->id,
-                'nama_penyewa' => $item->nama_penyewa,
-                'email' => $item->email,
-                'no_hp' => $item->no_hp,
-                'alamat' => $item->alamat,
+                'nama' => $item->nama,
+                'deskripsi' => $item->deskripsi,
+                'waktu' => $item->waktu,
             ];
         });
 
@@ -41,10 +39,10 @@ class PenyewaExport implements FromCollection, WithHeadings,WithColumnFormatting
     {
         return [
             'ID',
-            'Nama Penyewa',
-            'Email',
-            'No hp',
-            'Alamat',
+            'Nama Lanpangan',
+            'Deskripsi',
+            'Batas waktu',
+           
         ];
     }
 
@@ -53,9 +51,9 @@ class PenyewaExport implements FromCollection, WithHeadings,WithColumnFormatting
         return [
             'A' => '0', // Format ID sebagai teks
             'B' => '@', // Format Nama Penyewa sebagai teks
-            'C' => '0', // Format Email sebagai teks
-            'D' => '0', // Format No hp sebagai teks
-            'E' => '@', // Format Alamat sebagai teks
+            'C' => '0', // Format Deskripsi sebagai teks
+            'D' => '0', // Format Batas waktu sebagai teks
+           
         ];
     }
 
@@ -63,7 +61,7 @@ class PenyewaExport implements FromCollection, WithHeadings,WithColumnFormatting
     {
         return [
             AfterSheet::class => function (AfterSheet $event) {
-                $cellRange = 'A1:E' . count($this->collection()) + 1; // Jangkauan cell yang ingin diberi border
+                $cellRange = 'A1:D' . count($this->collection()) + 1; // Jangkauan cell yang ingin diberi border
                 $event->sheet->getDelegate()->getStyle($cellRange)->applyFromArray([
                     'borders' => [
                         'allBorders' => [
@@ -78,8 +76,7 @@ class PenyewaExport implements FromCollection, WithHeadings,WithColumnFormatting
                 $event->sheet->getDelegate()->getColumnDimension('B')->setWidth(20);
                 $event->sheet->getDelegate()->getColumnDimension('C')->setWidth(20);
                 $event->sheet->getDelegate()->getColumnDimension('D')->setWidth(15);
-                $event->sheet->getDelegate()->getColumnDimension('E')->setWidth(30);
             },
         ];
     }
-   }
+}
