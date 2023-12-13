@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AkunController;
+use App\Http\Controllers\pesanController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
@@ -59,6 +60,11 @@ Route::group(['prefix' => 'dashboard/admin'], function () {
         });
 });
 
+Route::get('/pesan/{id}', [pesanController::class,'index'])->name('pesan');
+Route::post('/lapangan/{lapanganId}/pemesanan', [pesanController::class,'store'])->name('pemesanan.store');
+
+Route::get('/riwayat', [pesanController::class,'RiwayatIndex'])->name('riwayat.index');
+Route::post('/lapangan/{lapanganId}/pemesanan', [pesanController::class,'store'])->name('pemesanan.store');
 
 Route::get('list_pesan', [App\Http\Controllers\pesanController::class,'readpesanan'])->name('pesan.index');
 // //

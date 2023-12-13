@@ -31,6 +31,11 @@ class pesan extends Model
        'id',
        'nama_penyewa',
        'email',
+       'no_hp',
+        'tanggal',
+       'waktu',
+        'durasi',
+        'id_lapangan',
       
    ];
 

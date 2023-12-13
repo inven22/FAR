@@ -18,7 +18,10 @@ return new class extends Migration
             $table->string('nama_penyewa');
             $table->string('email');
             $table->string('no_hp');
-            $table->string('alamat');
+            $table->date('tanggal');
+            $table->string('waktu');
+            $table->integer('durasi');
+            $table->unsignedBigInteger('id_lapangan');
             $table->timestamps();
         });
     }

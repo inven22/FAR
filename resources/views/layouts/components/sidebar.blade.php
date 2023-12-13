@@ -89,7 +89,7 @@ $links = [
             [
                 "section_text" => "Riwayat pesanan",
                 "section_icon" => "far fa-circle",
-                "section_href" => route('pesan.index'),
+                "section_href" => route('riwayat.index'),
                 "roles" => ['custumer'],
             ],
            

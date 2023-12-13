@@ -21,6 +21,12 @@ class lapangan extends Controller
         return view('lapangan.add');
     }
 
+    public function show()
+    {
+        
+        $lapangan = \DB::table('lapangans')->paginate(20);
+        return view('HomeUser',compact('lapangan'))->with('i', (request()->input('page', 1) - 1) * 5);
+    }
     public function insert(Request $request)
     {
         $request->validate([
